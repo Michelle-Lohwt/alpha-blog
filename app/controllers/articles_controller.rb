@@ -12,6 +12,15 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    render plain: params[:article]
+    # try `render plain: params` to check out the params in case your forget, and you will find the `:article` parameter
+    # params require the parameter :article (get it from the form in new.html.erb) to present 
+    # permits returns a copy of the parameters object with the specified keys (:title, :description)
+    @article = Article.new(params.require(:article).permit(:title, :description))
+    
+    # can try use `render plain: @article` to see whether an object is created
+    # can try use `render plain: @article.inspect` to see what has been filled up in the @article, in this case, it will be something like below if you fill up the title and description:
+    #   // #<Article id: nil, title: "testing", description: "testing desc", created_at: nil, updated_at: nil>
+    @article.save
+    redirect_to @article  # an alternative is `redirect_to article_path(@article)`
   end
 end
