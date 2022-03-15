@@ -20,7 +20,12 @@ class ArticlesController < ApplicationController
     # can try use `render plain: @article` to see whether an object is created
     # can try use `render plain: @article.inspect` to see what has been filled up in the @article, in this case, it will be something like below if you fill up the title and description:
     #   // #<Article id: nil, title: "testing", description: "testing desc", created_at: nil, updated_at: nil>
-    @article.save
-    redirect_to @article  # an alternative is `redirect_to article_path(@article)`
+    
+    if @article.save
+      # an alternative is `redirect_to article_path(@article)`
+      redirect_to @article
+    else
+      render 'new'
+    end
   end
 end
