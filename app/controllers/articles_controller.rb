@@ -24,6 +24,7 @@ class ArticlesController < ApplicationController
     #   // #<Article id: nil, title: "testing", description: "testing desc", created_at: nil, updated_at: nil>
     
     if @article.save
+      flash[:notice] = "Article was created successfully."
       # an alternative is `redirect_to article_path(@article)`
       redirect_to @article
     else
