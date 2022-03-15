@@ -8,7 +8,9 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    
+    # if this line is not present, the new.html.erb view will have error 
+    # because @article is not exist in `<% if @article.errors.any? %>` before error exist
+    @article = Article.new
   end
 
   def create
