@@ -9,6 +9,7 @@
   </ul>
 <% end %>
 
+<!-- The model allows us to display the existing article details in the edit form. -->
 <%= form_with(model: @article, local: true) do |f| %>
   <p>
     <%= f.label :title %><br/>
