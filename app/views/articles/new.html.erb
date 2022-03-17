@@ -11,7 +11,7 @@
 
 <!-- Gather the input (:title and :description) in the form with the scope named :article,-->
 <!-- then reload (local) the page at link `/articles` -->
-<%= form_with scope: :article, url:articles_path, local: true do |f| %>
+<%= form_with scope: :article, url: articles_path, local: true do |f| %>
   <p>
     <%= f.label :title %><br/>
     <%= f.text_field :title %>
