@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+
   def show
-    @article = Article.find(params[:id])
   end
 
   def index
@@ -14,14 +15,11 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def create
     # try `render plain: params` to check out the params in case your forget, and you will find the `:article` parameter
-    # params require the parameter :article (get it from the form in new.html.erb) to present 
-    # permits returns a copy of the parameters object with the specified keys (:title, :description)
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(article_params)
     
     # can try use `render plain: @article` to see whether an object is created
     # can try use `render plain: @article.inspect` to see what has been filled up in the @article, in this case, it will be something like below if you fill up the title and description:
@@ -37,8 +35,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
-    if @article.update(params.require(:article).permit(:title, :description))
+    if @article.update(article_params)
       flash[:notice] = "Article was updated succesfully."
       redirect_to @article
     else
@@ -47,8 +44,19 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     redirect_to articles_path
+  end
+
+  private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    # params require the parameter :article (get it from the form in new.html.erb) to present 
+    # permits returns a copy of the parameters object with the specified keys (:title, :description)
+    params.require(:article).permit(:title, :description)
   end
 end
