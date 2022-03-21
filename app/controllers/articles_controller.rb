@@ -19,8 +19,6 @@ class ArticlesController < ApplicationController
 
   def create
     # try `render plain: params` to check out the params in case your forget, and you will find the `:article` parameter
-    # params require the parameter :article (get it from the form in new.html.erb) to present 
-    # permits returns a copy of the parameters object with the specified keys (:title, :description)
     @article = Article.new(article_params)
     
     # can try use `render plain: @article` to see whether an object is created
@@ -57,6 +55,8 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
+    # params require the parameter :article (get it from the form in new.html.erb) to present 
+    # permits returns a copy of the parameters object with the specified keys (:title, :description)
     params.require(:article).permit(:title, :description)
   end
 end
