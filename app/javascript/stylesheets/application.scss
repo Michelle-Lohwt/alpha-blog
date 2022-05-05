@@ -1,14 +1,15 @@
 @import "bootstrap";
+@import '~stylesheets/pages.scss';
 
-.navbar{
+.navbar {
   background-color: black !important;
 }
 
-.nav-link{
+.nav-link {
   color: white !important;
 }
 
-#logo{
+#logo {
   float: left;
   font-size: 1.7em;
   color: #fff;
